@@ -24,8 +24,8 @@ export function Dashboard() {
 
   const defaultValues = {
     nome: '',
-    quantidade: 0,
-    preco: 0
+    quantidade: '',
+    preco: ''
   }
 
   const schema = yup.object().shape({
@@ -70,7 +70,7 @@ export function Dashboard() {
       setList(resp.data)
       resp.data.forEach(item => {
         qtdList += item.quantidade
-        qtdValue += item.preco
+        qtdValue += item.preco * item.quantidade
       })
       setQtd(qtdList)
       setTotalValue(qtdValue)
@@ -132,7 +132,7 @@ export function Dashboard() {
                 <Table.Row>
                   <Table.ColumnHeaderCell>Nome</Table.ColumnHeaderCell>
                   <Table.ColumnHeaderCell>Quantidade</Table.ColumnHeaderCell>
-                  <Table.ColumnHeaderCell>Preço</Table.ColumnHeaderCell>
+                  <Table.ColumnHeaderCell>Preço (unitário)</Table.ColumnHeaderCell>
                   <Table.ColumnHeaderCell>Ações</Table.ColumnHeaderCell>
                 </Table.Row>
               </Table.Header>
@@ -214,7 +214,7 @@ export function Dashboard() {
                   control={control}
                   name="preco"
                   render={({ field }) => (
-                    <Input type="number" value={field.value} onChange={field.onChange} placeHolder="Digite o preço" error={Boolean(errors.preco)} />
+                    <Input type="number" value={field.value} onChange={field.onChange} placeHolder="Digite o preço (unitário)" error={Boolean(errors.preco)} />
                   )}
                 />
               </div>
