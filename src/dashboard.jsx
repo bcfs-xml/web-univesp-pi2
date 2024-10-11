@@ -52,7 +52,7 @@ export function Dashboard() {
         setList(array)
         array.forEach(item => {
           qtdList += item.quantidade
-          qtdValue += item.preco
+          qtdValue += item.preco * item.quantidade
         })
 
         setQtd(qtdList)
