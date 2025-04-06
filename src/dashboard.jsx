@@ -11,6 +11,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import { Input } from "./components/input";
 import { Table } from "@radix-ui/themes";
+import { Link } from "react-router-dom";
 
 export function Dashboard() {
   const [loading, setIsLoading] = useState(false)
@@ -68,7 +69,7 @@ export function Dashboard() {
     setIsLoading(true)
     api.get('/').then((resp) => {
       setList(resp.data)
-      resp.data.forEach(item => {
+      resp.data.filter(item => item.preco !== 9999).forEach(item => {
         qtdList += item.quantidade
         qtdValue += item.preco * item.quantidade
       })
@@ -103,7 +104,12 @@ export function Dashboard() {
 
       <div className=" m-auto max-w-[1000px]  justify-center mt-8">
         <div className="flex flex-col w-full items-center gap-8">
-          <h1 className="font-bold text-4xl">ESTOQUE PÁDUA</h1>
+          <div className='w-full flex items-center justify-between'>
+            <h1 className="font-bold text-4xl">ESTOQUE PÁDUA</h1>
+            <Link to="/orders" className="bg-transparent border border-[#019C87]  h-10 text-[#019C87] px-6 text-xl py-4 font-bold text-center flex items-center justify-center rounded-xl transition-opacity hover:opacity-90">
+              Pedidos
+            </Link>
+          </div>
 
           <div className="h-0.5 bg-slate-500 w-full" />
         </div>
